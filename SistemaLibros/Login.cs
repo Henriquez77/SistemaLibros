@@ -1,4 +1,5 @@
 ﻿using SistemaLibros.DAO;
+using SistemaLibros.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,6 +47,23 @@ namespace SistemaLibros
 
         private void button1_Click(object sender, EventArgs e)
         {
+            DAOUsuario objUsuario = new DAOUsuario();
+            Usuario usuario = new Usuario();
+            usuario.AliasUsuario = textBox1.Text;
+            usuario.ContraseniaUsuario = textBox2.Text;
+            bool op = objUsuario.findByNameAndPass(usuario);
+            if (op)
+            {
+                frmAdministrativo frmAdmin = new frmAdministrativo();
+                frmAdmin.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("¡Contraseña ó Usuario incorrecto!", "¡Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+
             
         }
     }

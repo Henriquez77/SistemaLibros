@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic.ApplicationServices;
 using SistemaLibros.Models;
 
 namespace SistemaLibros.DAO
@@ -20,6 +21,21 @@ namespace SistemaLibros.DAO
                 }
             }
             return false;
+        }
+        public bool findByNameAndPass(Usuario usuario)
+        {
+            using (SistemalibrosContext context = new SistemalibrosContext())
+            {
+                var list = context.Usuarios.FirstOrDefault(x => x.AliasUsuario.Equals(usuario.AliasUsuario) && x.ContraseniaUsuario.Equals(usuario.ContraseniaUsuario));
+                if (list != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            } 
         }
     }
 }

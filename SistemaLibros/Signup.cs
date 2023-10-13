@@ -47,11 +47,10 @@ namespace SistemaLibros
             {
                 foreach (var role in roles)
                 {
-                    comboBox1.Items.Add(new Role { IdRol = role.IdRol, NombreRol = role.NombreRol });
+                    comboBox1.Items.Add(role.NombreRol.ToString());
                 }
 
-                comboBox1.DisplayMember = "NombreRol";
-                comboBox1.ValueMember = "IdRol";
+               
             }
             else
             {
@@ -79,7 +78,15 @@ namespace SistemaLibros
             objUsuario.NombreUsuario = textBox3.Text;
             objUsuario.AliasUsuario = textBox1.Text;
             objUsuario.ContraseniaUsuario = textBox2.Text;
-            objUsuario.RolidUsuario = (int)comboBox1.SelectedValue;
+            var rolText = comboBox1.Text;
+            if (rolText.Equals("Administrador"))
+            {
+                objUsuario.RolidUsuario = 1;
+            }
+            else
+            {
+                objUsuario.RolidUsuario = 2;
+            }
             var acction = objDAOUsuario.insertInto(objUsuario);
             if (acction)
             {
